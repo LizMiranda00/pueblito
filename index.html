@@ -186,7 +186,8 @@ document.querySelectorAll(".pueblo").forEach(img => {
   img.addEventListener("click", () => {
     const phone = "59171744396";
     const mensaje = encodeURIComponent("¡Hola! Estoy listo para pueblear 😄");
-    window.open(`https://wa.me/${phone}?text=${mensaje}`, "_blank");
+    window.location.href = `https://wa.me/${phone}?text=${mensaje}`;
+
   });
 });
   </script>
