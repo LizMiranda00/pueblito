@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>¿Vamos a pueblear?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Luckiest Guy', cursive;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #ff007f;
+      text-shadow: 2px 2px #fff;
+      margin-bottom: 40px;
+      animation: bounce 1s infinite alternate;
+    }
+
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    button {
+      font-size: 1.5rem;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      position: absolute;
+    }
+
+    #go {
+      background-color: #28a745;
+      color: white;
+      left: 50%;
+      top: 60%;
+      transform: translate(-50%, -50%);
+    }
+
+    #no {
+      background-color: #dc3545;
+      color: white;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+      animation: fadeIn 0.5s ease;
+    }
+
+    .modal-content h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: #ff007f;
+    }
+
+    .pueblos {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .pueblos img {
+      width: 200px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .pueblos img:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>¿Vamos a pueblear este finde?</h1>
+  <button id="go">GOOOO 🚀</button>
+  <button id="no">NO PUEDO 😓</button>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2>Elige a qué pueblo quieres ir</h2>
+      <div class="pueblos">
+        <img src="img/punata.PNG" alt="Pueblo 1">
+        <img src="img/colomi.PNG" alt="Pueblo 2">
+      </div>
+    </div>
+    <span class="close" onclick="cerrarModal()">×</span>
+  </div>
+
+  <script> 
+    const noBtn = document.getElementById("no");
+  
+    function moveButton() {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+    }
+  
+    moveButton();
+  
+    // Para laptop/PC: cuando el mouse se acerca
+    document.addEventListener("mousemove", (e) => {
+      const rect = noBtn.getBoundingClientRect();
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      const distance = Math.hypot(
+        rect.left + rect.width / 2 - mouseX,
+        rect.top + rect.height / 2 - mouseY
+      );
+      if (distance < 100) {
+        moveButton();
+      }
+    });
+  
+    // Para cuando intenten hacer clic (PC o celular)
+    noBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      moveButton();
+    });
+  
+    // 👉 Para celulares: cuando el dedo toque el botón
+    noBtn.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      moveButton();
+    }, { passive: false });
+  
+    // Abrir modal
+    document.getElementById("go").addEventListener("click", () => {
+      document.getElementById("modal").style.display = "flex";
+    });
+  
+    // Cerrar modal
+    function cerrarModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+  </script>
+  
+</body>
+</html>
