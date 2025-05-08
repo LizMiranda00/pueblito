@@ -126,8 +126,8 @@
     <div class="modal-content">
       <h2>Elige a qué pueblo quieres ir</h2>
       <div class="pueblos">
-        <img src="img/punata.PNG" alt="Pueblo 1">
-        <img src="img/colomi.PNG" alt="Pueblo 2">
+        <img src="img/punata.PNG" alt="Pueblo 1" class="pueblo">
+        <img src="img/colomi.PNG" alt="Pueblo 2" class="pueblo">
       </div>
     </div>
     <span class="close" onclick="cerrarModal()">×</span>
@@ -180,6 +180,15 @@
     function cerrarModal() {
       document.getElementById("modal").style.display = "none";
     }
+
+    // Redirigir al WhatsApp cuando se haga clic en una imagen
+document.querySelectorAll(".pueblo").forEach(img => {
+  img.addEventListener("click", () => {
+    const phone = "59171744396";
+    const mensaje = encodeURIComponent("¡Hola! Estoy listo para pueblear 😄");
+    window.open(`https://wa.me/${phone}?text=${mensaje}`, "_blank");
+  });
+});
   </script>
   
 </body>
